@@ -1,61 +1,25 @@
+import 'package:chat_app/add_contact_page.dart';
+import 'package:chat_app/contact_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import 'models/contact.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class Contact {
-  String name;
-  String phoneNumber;
-  Contact({required this.name, required this.phoneNumber});
-}
-
 class MyApp extends StatelessWidget {
-  final List<Contact> contacts = [
-    Contact(name: "Hüseyin", phoneNumber: "0536 342 3299"),
-    Contact(name: "Hüseyin", phoneNumber: "0536 342 3299"),
-    Contact(name: "Hüseyin", phoneNumber: "0536 342 3299")
-  ];
-
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Text("Chat App"),
-        actions: <Widget>[IconButton(onPressed: () {}, icon: Icon(Icons.home))],
-      ),
-      body: Container(
-        child: ListView.builder(
-            itemCount: contacts.length,
-            itemBuilder: (BuildContext context, int index) {
-              Contact contact = contacts[index];
-              return Container(
-                padding: EdgeInsets.all(5),
-                child: Row(children: <Widget>[
-                  CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://cdn.wallpapersafari.com/27/13/KCqWxQ.jpg"),
-                      child: Text(contact.name[0])),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(" " + contact.name + " "),
-                      Text(contact.phoneNumber)
-                    ],
-                  ),
-                ]),
-              );
-            }),
-      ),
-    ));
+    return MaterialApp(home: ContactPage());
   }
 }
 
 class BottomNavBarFb1 extends StatelessWidget {
   const BottomNavBarFb1({Key? key}) : super(key: key);
 
-  final primaryColor = const Color(0xff4338CA);
-  final secondaryColor = const Color(0xff6D28D9);
+  final primaryColor = Colors.blue;
+  final secondaryColor = Colors.blue;
   final accentColor = const Color(0xffffffff);
   final backgroundColor = const Color(0xffffffff);
   final errorColor = const Color(0xffEF4444);
@@ -73,7 +37,10 @@ class BottomNavBarFb1 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconBottomBar(
-                  text: "", icon: Icons.feed, selected: true, onPressed: () {}),
+                  text: "",
+                  icon: Icons.contacts,
+                  selected: true,
+                  onPressed: () {}),
               IconBottomBar(
                   text: "Search",
                   icon: Icons.search_outlined,
@@ -81,19 +48,9 @@ class BottomNavBarFb1 extends StatelessWidget {
                   onPressed: () {}),
               IconBottomBar2(
                   text: "Home",
-                  icon: Icons.home,
+                  icon: Icons.message,
                   selected: false,
                   onPressed: () {}),
-              IconBottomBar(
-                  text: "Cart",
-                  icon: Icons.local_grocery_store_outlined,
-                  selected: false,
-                  onPressed: () {}),
-              IconBottomBar(
-                  text: "Calendar",
-                  icon: Icons.date_range_outlined,
-                  selected: false,
-                  onPressed: () {})
             ],
           ),
         ),
@@ -115,7 +72,7 @@ class IconBottomBar extends StatelessWidget {
   final bool selected;
   final Function() onPressed;
 
-  final primaryColor = const Color(0xff4338CA);
+  final primaryColor = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +104,7 @@ class IconBottomBar2 extends StatelessWidget {
   final IconData icon;
   final bool selected;
   final Function() onPressed;
-  final primaryColor = const Color(0xff4338CA);
+  final primaryColor = Colors.blue;
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
@@ -159,6 +116,165 @@ class IconBottomBar2 extends StatelessWidget {
           size: 25,
           color: Colors.white,
         ),
+      ),
+    );
+  }
+}
+
+class TopBarFb4 extends StatelessWidget {
+  final String title;
+  final String upperTitle;
+  final Function() onTapMenu;
+  const TopBarFb4(
+      {required this.title,
+      required this.upperTitle,
+      required this.onTapMenu,
+      Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: onTapMenu,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(title,
+                  style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal)),
+              Text(upperTitle,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TabPair {
+  final Tab tab;
+  final Widget view;
+  TabPair({required this.tab, required this.view});
+}
+
+List<TabPair> TabPairs = [
+  TabPair(
+    tab: Tab(
+      text: 'Intro',
+    ),
+    view: Center(
+      child: Text(
+        'Intro here',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ),
+  ),
+  TabPair(
+    tab: Tab(
+      text: 'Ingredients',
+    ),
+    view: Center(
+      // replace with your own widget here
+      child: Text(
+        'Ingredients here',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ),
+  ),
+  TabPair(
+    tab: Tab(
+      text: 'Steps',
+    ),
+    view: Center(
+      child: Text(
+        'Steps here',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ),
+  )
+];
+
+class TabBarAndTabViews extends StatefulWidget {
+  @override
+  _TabBarAndTabViewsState createState() => _TabBarAndTabViewsState();
+}
+
+class _TabBarAndTabViewsState extends State<TabBarAndTabViews>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: TabPairs.length, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          // give the tab bar a height [can change height to preferred height]
+          Container(
+            height: 45,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(
+                25.0,
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(6),
+              child: TabBar(
+                  controller: _tabController,
+                  // give the indicator a decoration (color and border radius)
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      25.0,
+                    ),
+                    color: Color(0xFFFF8527),
+                  ),
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.black,
+                  tabs: TabPairs.map((tabPair) => tabPair.tab).toList()),
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+                controller: _tabController,
+                children: TabPairs.map((tabPair) => tabPair.view).toList()),
+          ),
+        ],
       ),
     );
   }
