@@ -38,7 +38,7 @@ class _AddContactFormState extends State<AddContactForm> {
                     child: TextFormField(
                       decoration: InputDecoration(hintText: "Kişi Adı"),
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "İsim Gerekli";
                         }
                       },
