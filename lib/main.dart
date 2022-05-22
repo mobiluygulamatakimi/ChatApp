@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'models/contact.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
