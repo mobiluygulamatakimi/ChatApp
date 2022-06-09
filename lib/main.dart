@@ -1,24 +1,28 @@
-import 'package:chat_app/add_contact_page.dart';
-import 'package:chat_app/contact_page.dart';
-import 'package:chat_app/login.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+// Copyright 2018 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
-import 'models/contact.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginPage()  ,
-    debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      title: 'Welcome to Flutter',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Welcome to Flutter'),
+        ),
+        body: const Center(
+          child: Text('Hello World'),
+        ),
+      ),
     );
   }
 }
-
-
-
-
