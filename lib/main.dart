@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   final List<Contact> contacts = [
     Contact(name: "Hüseyin", phoneNumber: "0536 342 3299"),
     Contact(name: "Hüseyin", phoneNumber: "0536 342 3299"),
+    Contact(name: "Hüseyin", phoneNumber: "0536 342 3299")
   ];
 
   Widget build(BuildContext context) {
