@@ -122,7 +122,7 @@ class LoginPage extends StatelessWidget{
                             .SignIn(emailController.text,
                             passController.text);
                         if(user!=null){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Users()));
+                          Navigator.of(context).pushNamed("users");
                         }
                       },
                     ),
@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget{
                               ),
                             ),
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Register()));
+                              Navigator.of(context).pushNamed("register");
                             },
                           ),
                         ],

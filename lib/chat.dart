@@ -71,9 +71,8 @@ class _ChatState extends State<Chat> {
           Expanded(           
             child: StreamBuilder<QuerySnapshot>(
               stream: chatref
-              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"]).snapshots(),
+              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"]).orderBy('time',descending: true).snapshots(),
               builder: (context,AsyncSnapshot snapshot){
-                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 if(snapshot.hasData){
                   return  ListView.builder(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -106,8 +105,7 @@ class _ChatState extends State<Chat> {
                        hintText: "message",
                        enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
-                                  borderSide: BorderSide(color: Color(
-                                      0xff2DBC0E))
+                                  borderSide: BorderSide(color: Colors.cyan)
                               ),
                        
                      ),
@@ -119,7 +117,10 @@ class _ChatState extends State<Chat> {
                    flex: 1,
                    child: InkWell(
                      child: Container(
-                       child: Icon(Icons.send),
+                       child: Icon(
+                           Icons.send,
+                         color: Colors.cyan,
+                       ),
                      ),
                      onTap: (){
                        if(messageCon.text.isNotEmpty){
@@ -174,7 +175,8 @@ class Message extends StatelessWidget {
           child:Text("${msg["timeh"]}",
             style: TextStyle(
             color: Colors.black45,
-            fontSize: 15) ,
+            fontSize: 12,
+            fontWeight: FontWeight.bold) ,
           )
         )
       ],

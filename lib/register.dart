@@ -128,13 +128,12 @@ class Register extends StatelessWidget {
                             ),),
                           )),
                       onTap: ()async{
-                        print("${passController.text}${emailController.text}${nameController.text}");
                         var user = await authServer
                             .Create(nameController.text.toString(),
                             emailController.text.toString(),
                             passController.text.toString());
                         if(user!=null){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                          Navigator.of(context).pushNamed("login");
                         }
                       },
                     ),
@@ -158,7 +157,7 @@ class Register extends StatelessWidget {
                               ),
                             ),
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                              Navigator.of(context).pushNamed("login");
                             },
                           ),
                         ],
