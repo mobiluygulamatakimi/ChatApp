@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 // ignore: must_be_immutable
 class Chat extends StatefulWidget {
@@ -42,7 +41,7 @@ class _ChatState extends State<Chat> {
     return Scaffold(
       backgroundColor: Color(0xffd7eec4),
       appBar: AppBar(
-        backgroundColor: Color(0xff2DBC0E),
+        backgroundColor: Colors.cyan,
         title:FutureBuilder(
             future: userRef.where("id",isEqualTo: userdoc).get(),
             builder: (context,AsyncSnapshot snapshot){
@@ -50,7 +49,7 @@ class _ChatState extends State<Chat> {
                 return Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage("${snapshot.data.docs[0]["imageurl"]}"),
+                      backgroundImage: AssetImage("assets/logo.jpg"),
                     ),
                     SizedBox(width: 8,),
                     Text("${snapshot.data.docs[0]["username"]}",
@@ -72,9 +71,9 @@ class _ChatState extends State<Chat> {
           Expanded(           
             child: StreamBuilder<QuerySnapshot>(
               stream: chatref
-              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"])
-              .orderBy('time',descending: true).snapshots(),
+              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"]).snapshots(),
               builder: (context,AsyncSnapshot snapshot){
+                print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 if(snapshot.hasData){
                   return  ListView.builder(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -104,7 +103,7 @@ class _ChatState extends State<Chat> {
                      padding: EdgeInsets.all(20),
                      child: TextField(
                      decoration: InputDecoration(
-                       hintText: "message".tr(),
+                       hintText: "message",
                        enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(40),
                                   borderSide: BorderSide(color: Color(
@@ -156,12 +155,12 @@ class Message extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width*0.80,
           ),
           margin: EdgeInsets.only(top: 10,left: 10,right: 10),
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 12),
           decoration: isSender ? BoxDecoration(
             color: Color(0x97A394FF),
             borderRadius: BorderRadius.circular(30)
           ) :BoxDecoration(
-            color: Color(0xff2DBC0E),
+            color: Colors.cyan,
             borderRadius: BorderRadius.circular(30)
           ),
           child: Text("${msg["message"]}",

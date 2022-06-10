@@ -10,27 +10,21 @@ class AuthServer{
   // ignore: non_constant_identifier_names
   Create (String name ,String email , String password)async{
     try {
-      UserCredential userCredential = await FirebaseAuth
-          .instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: "alkjl48@gmail.com",
+        password: "hala6231",
       );
       await firestore
           .collection("Users").doc(firebaseAuth.currentUser!.uid).set({
-            "id" : firebaseAuth.currentUser!.uid,
-            "username":name,
-            'email': email,
-            "storyCount" : 0,
-            'imageurl' : "https://firebasestorage.googleapis.com/v0/b/kjlchatapp-44698.appspot.com/o/KjlLogo.jpg?alt=media&token=2d5fb271-f1dd-43e5-bdc6-a98597caf326"
-          });   
-      return userCredential.user ;
+        "id" : firebaseAuth.currentUser!.uid,
+        "username":name,
+        'email': email,
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
-        return null;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
-        return null;
       }
     } catch (e) {
       print(e);
@@ -39,13 +33,14 @@ class AuthServer{
   }
 
   // ignore: non_constant_identifier_names
-  SignIn (String email,String password)async{
+  Future SignIn (String email,String password)async{
     try {
       UserCredential userCredential = await firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password
+          email: email.trim(),
+          password: password.trim()
       );
       return userCredential;
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');

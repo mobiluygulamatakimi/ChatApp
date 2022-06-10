@@ -1,7 +1,13 @@
 
+import 'package:chat_app/login.dart';
+import 'package:chat_app/server/auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatelessWidget {
+  AuthServer authServer = AuthServer();
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +39,7 @@ class Register extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(child: Container(
+            Container(
               height: MediaQuery.of(context).size.height*0.8,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -62,6 +68,7 @@ class Register extends StatelessWidget {
                                 )
                             ),
                             child: TextField(
+                              controller: nameController,
                               decoration: InputDecoration(
                                   hintText: "Adı Soyadı",
                                   hintStyle: TextStyle(color: Colors.grey),
@@ -77,6 +84,7 @@ class Register extends StatelessWidget {
                                 )
                             ),
                             child: TextField(
+                              controller: emailController,
                               decoration: InputDecoration(
                                   hintText: "E-posta",
                                   hintStyle: TextStyle(color: Colors.grey),
@@ -92,6 +100,7 @@ class Register extends StatelessWidget {
                                 )
                             ),
                             child: TextField(
+                              controller: passController,
                               decoration: InputDecoration(
                                   hintText: "Şifre Giriniz",
                                   hintStyle: TextStyle(color: Colors.grey),
@@ -99,46 +108,66 @@ class Register extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(color: Colors.grey)
-                                )
-                            ),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  hintText: "Şifre Onaylayın",
-                                  hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
-                              ),
-                            ),
-                          )
-
                         ],
                       ),
                     ),
                     SizedBox(height: 40,),
-
+                    InkWell(
+                      child: Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          decoration: BoxDecoration(
+                            color: Colors.cyan[500],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text("Üye ol",style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold
+                            ),),
+                          )),
+                      onTap: ()async{
+                        print("${passController.text}${emailController.text}${nameController.text}");
+                        var user = await authServer
+                            .Create(nameController.text.toString(),
+                            emailController.text.toString(),
+                            passController.text.toString());
+                        if(user!=null){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                        }
+                      },
+                    ),
                     SizedBox(height: 40,),
                     Container(
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        decoration: BoxDecoration(
-                          color: Colors.cyan[500],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text("Giriş",style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Hesapınız varsa ? ",style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15
                           ),),
-                        ))
+                          SizedBox(width: 5,),
+                          InkWell(
+                            child: Text(
+                              "tıklayın ",
+                              style: TextStyle(
+                                color: Colors.cyan,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                              ),
+                            ),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                            },
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
-            ))
+            )
           ],
         ),
       ),
