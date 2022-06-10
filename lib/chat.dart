@@ -71,7 +71,7 @@ class _ChatState extends State<Chat> {
           Expanded(           
             child: StreamBuilder<QuerySnapshot>(
               stream: chatref
-              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"]).snapshots(),
+              .where("chatId",whereIn: ["$user$userdoc","$userdoc$user"]).orderBy('time',descending: true).snapshots(),
               builder: (context,AsyncSnapshot snapshot){
                 print("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                 if(snapshot.hasData){
