@@ -36,8 +36,18 @@ class _AddContactFormState extends State<AddContactForm> {
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: TextFormField(
+<<<<<<< HEAD
+                      decoration: const InputDecoration(hintText: "Kişi Adı"),
+                      validator: (String? value) {
+=======
+<<<<<<< HEAD
+                      decoration: const InputDecoration(hintText: "Kişi Adı"),
+                      validator: (String? value) {
+=======
                       decoration: InputDecoration(hintText: "Kişi Adı"),
                       validator: (value) {
+>>>>>>> fbd9bd9fd83a449b44d3b34f90101c1316f6d296
+>>>>>>> 17cb7fd166c10552f893b5553aa69bf4b10acfa4
                         if (value!.isEmpty) {
                           return "İsim Gerekli";
                         }
@@ -57,7 +67,18 @@ class _AddContactFormState extends State<AddContactForm> {
                     )),
                 RaisedButton(
                   child: Text("Kaydet"),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+
+                      Contact.contacts
+                          .add(Contact(name: name!, phoneNumber: phoneNumber!));
+                      var snackbar = Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text("${name} kaydedildi")));
+
+                      snackbar.closed.then((value) => Navigator.pop(context));
+                    }
+                  },
                   color: Colors.blue,
                   textColor: Colors.white,
                 )

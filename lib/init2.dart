@@ -7,18 +7,14 @@ import 'package:flutter/widgets.dart';
 import 'models/contact.dart';
 
 void main() {
-
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginPage()  ,
-    debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      home: ContactPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
-
-
-
-
