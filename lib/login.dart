@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
                               controller: emailController,
                               decoration: InputDecoration(
                                   errorText: errorText,
-                                  hintText: "E-postanız giriniz",
+                                  hintText: "E-postanızı giriniz",
                                   hintStyle: TextStyle(
                                     color: Colors.grey,
                                   ),
@@ -94,7 +94,7 @@ class LoginPage extends StatelessWidget {
                             child: TextField(
                               controller: passController,
                               decoration: InputDecoration(
-                                  hintText: "Şifre giriniz",
+                                  hintText: "Şifrenizi giriniz",
                                   hintStyle: TextStyle(color: Colors.grey),
                                   border: InputBorder.none),
                             ),
@@ -106,7 +106,7 @@ class LoginPage extends StatelessWidget {
                       height: 40,
                     ),
                     Text(
-                      "Şifreniz Unuttunuz mu?",
+                      "Şifrenizi mi unuttunuz?",
                       style: TextStyle(color: Colors.grey),
                     ),
                     SizedBox(
@@ -163,7 +163,7 @@ class LoginPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Hesapınız yoksa ? ",
+                            "Hesabınız yoksa?",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 15),
                           ),
@@ -172,7 +172,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           InkWell(
                             child: Text(
-                              "tıklayın ",
+                              "tıklayınız ",
                               style: TextStyle(
                                   color: Colors.cyan,
                                   fontWeight: FontWeight.bold,
