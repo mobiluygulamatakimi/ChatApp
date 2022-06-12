@@ -1,6 +1,5 @@
+import 'package:chat_app/server/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:kjlchat/Server/auth.dart';
 
 // ignore: camel_case_types
 class forgotPass extends StatefulWidget {
@@ -17,7 +16,7 @@ class _forgotPassState extends State<forgotPass> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-                "reset_password".tr(), 
+                "reset_password",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -26,7 +25,7 @@ class _forgotPassState extends State<forgotPass> {
                 ),
               ),
               centerTitle: true,
-              backgroundColor: Color(0xff2DBC0E),
+              backgroundColor: Colors.cyan,
       ),
       body: Container(
         padding: EdgeInsets.all(20),
@@ -36,16 +35,14 @@ class _forgotPassState extends State<forgotPass> {
             TextFormField(
               decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(20),
-                  labelText: "email".tr(),
+                  labelText: "email",
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
-                      borderSide: BorderSide(color: Color(
-                          0xff2DBC0E))
+                      borderSide: BorderSide(color: Colors.cyan)
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(40),
-                      borderSide: BorderSide(color: Color(
-                          0xff2DBC0E))
+                      borderSide: BorderSide(color: Colors.cyan)
                   )
               ),
               controller: emailCon,
@@ -53,14 +50,14 @@ class _forgotPassState extends State<forgotPass> {
             SizedBox(height: 20,),
             // ignore: deprecated_member_use
             RaisedButton(
-              color: Color(0xff2DBC0E),
+              color: Colors.cyan,
               onPressed: (){
                 // ignore: unnecessary_null_comparison
                 if(emailCon.text!=null){
                   authServer.ResetPass(emailCon.text, context);
                 }
               },
-              child: Text("send".tr()),
+              child: Text("send"),
               textColor: Colors.white,
             ),
           ],

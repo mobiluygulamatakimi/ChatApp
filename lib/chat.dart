@@ -45,7 +45,7 @@ class _ChatState extends State<Chat> {
         appBar: AppBar(
           backgroundColor: Colors.cyan,
           title: FutureBuilder(
-              future: userRef.where("userId", isEqualTo: userdoc).get(),
+              future: userRef.where("id", isEqualTo: userdoc).get(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Row(

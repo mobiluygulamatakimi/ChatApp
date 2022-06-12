@@ -35,7 +35,7 @@ class _UsersState extends State<Users> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: FutureBuilder(
-          future: userRef.where("userId", isNotEqualTo: user).get(),
+          future: userRef.where("id", isNotEqualTo: user).get(),
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(

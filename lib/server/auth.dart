@@ -22,6 +22,7 @@ class AuthServer {
         "username": name,
         'email': email,
       });
+      return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

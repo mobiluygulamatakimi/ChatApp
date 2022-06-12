@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(color: Colors.grey))),
@@ -105,9 +105,18 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 40,
                     ),
-                    Text(
-                      "Şifrenizi mi unuttunuz?",
-                      style: TextStyle(color: Colors.grey),
+                    InkWell(
+                      child: Text(
+                        "Şifrenizi mi unuttunuz?",
+                        style: TextStyle(
+                            color: Colors.cyan,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15
+                        ),
+                      ),
+                      onTap: (){
+                        Navigator.of(context).pushNamed("forgotPass");
+                      },
                     ),
                     SizedBox(
                       height: 40,

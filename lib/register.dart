@@ -130,8 +130,6 @@ class Register extends StatelessWidget {
                             ),
                           )),
                       onTap: () async {
-                        print(
-                            "${passController.text}${emailController.text}${nameController.text}");
                         var user = await authServer.Create(
                             nameController.text.toString(),
                             emailController.text.toString(),

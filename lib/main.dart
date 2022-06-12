@@ -1,6 +1,7 @@
 import 'package:chat_app/Users.dart';
 import 'package:chat_app/login.dart';
 import 'package:chat_app/register.dart';
+import 'package:chat_app/restPass.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         "users" : (context) => Users(),
         "login" : (context) => LoginPage(),
         "register" : (context) => Register(),
+        "forgotPass" : (context)=> forgotPass(),
       },
     debugShowCheckedModeBanner: false,
     );
