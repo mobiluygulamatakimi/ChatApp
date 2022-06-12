@@ -11,11 +11,9 @@ class Users extends StatefulWidget {
 }
 
 class _UsersState extends State<Users> {
-
-  CollectionReference userRef=FirebaseFirestore.instance.collection("Users");
+  CollectionReference userRef = FirebaseFirestore.instance.collection("Users");
   var user = FirebaseAuth.instance.currentUser!.uid;
-  AuthServer authServer=AuthServer();
-
+  AuthServer authServer = AuthServer();
 
   @override
   Widget build(BuildContext context) {
@@ -26,79 +24,85 @@ class _UsersState extends State<Users> {
         backgroundColor: Colors.cyan,
         actions: [
           IconButton(
-              onPressed:(){
+              onPressed: () {
                 authServer.SignOut();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));
               },
-              icon: Icon(
-                  Icons.logout
-              ))
+              icon: Icon(Icons.logout)),
         ],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: FutureBuilder(
-          future: userRef.where("id",isNotEqualTo: user).get(),
-          builder: (context,AsyncSnapshot snapshot){
-            if(snapshot.hasData){
-              return
-                ListView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    itemBuilder: (context,i){
-                      return userItim(quer : snapshot.data.docs[i]);
-                    });
+          future: userRef.where("userId", isNotEqualTo: user).get(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data.docs.length,
+                  itemBuilder: (context, i) {
+                    return userItem(quer: snapshot.data.docs[i]);
+                  });
             }
-            return Center(child: CircularProgressIndicator(),);
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           },
         ),
       ),
-    ) ;
+    );
   }
 }
 
 // ignore: camel_case_types
-class userItim extends StatefulWidget{
+class userItem extends StatefulWidget {
   final quer;
-  userItim ({this.quer});
+  userItem({this.quer});
 
   @override
-  _userItimState createState() => _userItimState();
+  _userItemState createState() => _userItemState();
 }
 
 // ignore: camel_case_types
-class _userItimState extends State<userItim> {
-    @override
-    Widget build(BuildContext context) {
-      return InkWell(
-        child: Container(
-          color: Color(0xffd7eec4),
+class _userItemState extends State<userItem> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Container(
+          color: Color.fromARGB(255, 89, 211, 241),
           padding: EdgeInsets.all(5),
           margin: EdgeInsets.all(3),
           height: 80,
-            child: Row(children: [
+          child: Row(
+            children: [
               Container(
-                height: 80,width: 100,
+                height: 80,
+                width: 100,
                 child: CircleAvatar(
+                  backgroundImage: AssetImage("assets/logo.png"),
+                  child: Text("${widget.quer["username"]}"[0].toUpperCase()),
                   radius: 60,
-                  backgroundImage: AssetImage("assets/logo.jpg"),
-                  ),
-
+                  backgroundColor: Colors.green,
+                ),
               ),
-              Text("${widget.quer["username"]}", style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,letterSpacing: 1,
-                              fontFamily: "arefRuqaa"
-                          ),)
-          ],)
-        ),
-        onTap: (){
-          Navigator
-              .push(context,
-              MaterialPageRoute(
+              Text(
+                "${widget.quer["username"]}".toUpperCase(),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    letterSpacing: 1,
+                    fontFamily: "arefRuqaa"),
+              )
+            ],
+          )),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
                 // ignore: non_constant_identifier_names
-                  builder:(_UsersState)=>
-                      Chat(userdoce: "${widget.quer["id"]}")));
-        },
-      );  
-    }
+                builder: (_UsersState) =>
+                    Chat(userdoce: "${widget.quer["id"]}")));
+      },
+    );
+  }
 }
