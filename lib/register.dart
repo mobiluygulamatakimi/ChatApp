@@ -1,4 +1,3 @@
-
 import 'package:chat_app/login.dart';
 import 'package:chat_app/server/auth.dart';
 import 'package:flutter/material.dart';
@@ -13,105 +12,106 @@ class Register extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        width:double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Colors.cyan,
-            Colors.cyan,
-            Colors.cyan
-          ]),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [Colors.cyan, Colors.cyan, Colors.cyan]),
         ),
         child: ListView(
           children: <Widget>[
-            SizedBox(height: 80,),
+            SizedBox(
+              height: 80,
+            ),
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
-                    child: Text("Hesap Oluştur",style: TextStyle(color: Colors.white,fontSize: 40),),
+                    child: Text(
+                      "Hesap Oluştur",
+                      style: TextStyle(color: Colors.white, fontSize: 40),
+                    ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Center(
-                    child: Text("Hoş Geldiniz",style: TextStyle(color: Colors.white,fontSize: 18),),
+                    child: Text(
+                      "Hoş Geldiniz",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   )
                 ],
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height*0.8,
+              height: MediaQuery.of(context).size.height * 0.8,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60),
-                  )
-              ),
+                  )),
               child: Padding(
                 padding: EdgeInsets.all(30),
                 child: Column(
-                  children:<Widget>[
-                    SizedBox(height: 40,),
+                  children: <Widget>[
+                    SizedBox(
+                      height: 40,
+                    ),
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)
-                      ),
+                          borderRadius: BorderRadius.circular(10)),
                       child: Column(
-                        children:<Widget>[
+                        children: <Widget>[
                           Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 border: Border(
-                                    bottom: BorderSide(color: Colors.grey)
-                                )
-                            ),
+                                    bottom: BorderSide(color: Colors.grey))),
                             child: TextField(
                               controller: nameController,
                               decoration: InputDecoration(
                                   hintText: "Adı Soyadı",
                                   hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
-                              ),
+                                  border: InputBorder.none),
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 border: Border(
-                                    bottom: BorderSide(color: Colors.grey)
-                                )
-                            ),
+                                    bottom: BorderSide(color: Colors.grey))),
                             child: TextField(
                               controller: emailController,
                               decoration: InputDecoration(
                                   hintText: "E-posta",
                                   hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
-                              ),
+                                  border: InputBorder.none),
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 border: Border(
-                                    bottom: BorderSide(color: Colors.grey)
-                                )
-                            ),
+                                    bottom: BorderSide(color: Colors.grey))),
                             child: TextField(
                               controller: passController,
                               decoration: InputDecoration(
                                   hintText: "Şifre Giriniz",
                                   hintStyle: TextStyle(color: Colors.grey),
-                                  border: InputBorder.none
-                              ),
+                                  border: InputBorder.none),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: 40,),
+                    SizedBox(
+                      height: 40,
+                    ),
                     InkWell(
                       child: Container(
                           height: 50,
@@ -121,44 +121,55 @@ class Register extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Center(
-                            child: Text("Üye ol",style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold
-                            ),),
+                            child: Text(
+                              "Üye ol",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           )),
-                      onTap: ()async{
-                        print("${passController.text}${emailController.text}${nameController.text}");
-                        var user = await authServer
-                            .Create(nameController.text.toString(),
+                      onTap: () async {
+                        var user = await authServer.Create(
+                            nameController.text.toString(),
                             emailController.text.toString(),
                             passController.text.toString());
-                        if(user!=null){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                        if (user != null) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
                         }
                       },
                     ),
-                    SizedBox(height: 40,),
+                    SizedBox(
+                      height: 40,
+                    ),
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Hesapınız varsa ? ",style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15
-                          ),),
-                          SizedBox(width: 5,),
+                          Text(
+                            "Hesabınız Varsa?",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
                           InkWell(
                             child: Text(
                               "tıklayın ",
                               style: TextStyle(
-                                color: Colors.cyan,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15
-                              ),
+                                  color: Colors.cyan,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
                             ),
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
                             },
                           ),
                         ],

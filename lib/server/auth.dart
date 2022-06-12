@@ -11,8 +11,8 @@ class AuthServer {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: "alkjl48@gmail.com",
-        password: "hala6231",
+        email: email,
+        password: password,
       );
       await firestore
           .collection("Users")
@@ -22,6 +22,7 @@ class AuthServer {
         "username": name,
         'email': email,
       });
+      return credential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
