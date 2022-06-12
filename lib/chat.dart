@@ -51,7 +51,7 @@ class _ChatState extends State<Chat> {
                   return Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: AssetImage("assets/logo.jpg"),
+                        backgroundImage: AssetImage("assets/logo.png"),
                       ),
                       SizedBox(
                         width: 8,

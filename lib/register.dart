@@ -159,7 +159,7 @@ class Register extends StatelessWidget {
                           ),
                           InkWell(
                             child: Text(
-                              "tıklayın ",
+                              "Tıklayın ",
                               style: TextStyle(
                                   color: Colors.cyan,
                                   fontWeight: FontWeight.bold,
