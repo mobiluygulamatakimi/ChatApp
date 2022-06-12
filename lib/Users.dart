@@ -19,7 +19,7 @@ class _UsersState extends State<Users> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("users"),
+        title: Text("Aktif Kullanıcılar"),
         centerTitle: true,
         backgroundColor: Colors.cyan,
         actions: [
